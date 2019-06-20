@@ -5,5 +5,5 @@ return [
     'senderEmail' => 'noreply@example.com',
     'senderName' => 'Example.com mailer',
     'user.passwordResetTokenExpire' => 3600,
-    'supportEmail' => 'metusmail@gmail.com'
+    'supportEmail' => 'valami@domainem.asd'
 ];
