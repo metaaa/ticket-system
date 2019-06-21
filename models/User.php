@@ -17,7 +17,7 @@ use Yii;
  * @property string $password_reset_token
  * @property string $email
  * @property integer $admin
- * @property integer $created_at
+ * @property timestamp $created_at
  * @property integer $updated_at
  */
 

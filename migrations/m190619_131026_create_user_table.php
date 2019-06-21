@@ -26,7 +26,7 @@ class m190619_131026_create_user_table extends Migration
             'password_reset_token' => $this->string()->unique(),
             'email' => $this->string()->notNull()->unique(),
             'admin' => $this->integer()->defaultValue(0),
-            'created_at' => $this->integer()->notNull(),
+            'created_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
             'updated_at' => $this->integer()->notNull(),
         ], $tableOptions);
     }
