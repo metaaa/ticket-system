@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\UserSearch */
+/* @var $model app\models\ReportSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="user-search">
+<div class="report-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -17,21 +17,17 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'username') ?>
+    <?= $form->field($model, 'room') ?>
 
-    <?= $form->field($model, 'auth_key') ?>
+    <?= $form->field($model, 'status') ?>
 
-    <?= $form->field($model, 'password_hash') ?>
+    <?= $form->field($model, 'reporterId') ?>
 
-    <?= $form->field($model, 'password_reset_token') ?>
+    <?= $form->field($model, 'suspectId') ?>
 
-    <?php // echo $form->field($model, 'email') ?>
+    <?php // echo $form->field($model, 'calmDown') ?>
 
-    <?php // echo $form->field($model, 'admin') ?>
-
-    <?php // echo $form->field($model, 'created_at') ?>
-
-    <?php // echo $form->field($model, 'updated_at') ?>
+    <?php // echo $form->field($model, 'comment') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

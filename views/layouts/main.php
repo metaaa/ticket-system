@@ -43,6 +43,12 @@ AppAsset::register($this);
             ['label' => 'Contact', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ? (
             ['label' => 'Signup', 'url' => ['/site/signup']]) : (""),
+            Yii::$app->user->isGuest ? ("") : (
+            ['label' => 'User Edit', 'url' => ['/user']]),
+            Yii::$app->user->isGuest ? (
+            ['label' => 'Reports', 'url' => ['/site/reports']]
+            ) : (
+            ['label' => 'Report!', 'url' => ['/report']]),
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (

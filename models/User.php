@@ -16,7 +16,7 @@ use Yii;
  * @property string $password_hash write-only password
  * @property string $password_reset_token
  * @property string $email
- * @property integer $admin
+ * @property string $role
  * @property timestamp $created_at
  * @property integer $updated_at
  */
@@ -39,8 +39,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     {
         return [
             [['username'], 'required'],
-            [['email', 'username', 'password_hash', 'password_reset_token', 'auth_key'], 'string', 'max' => 255],
-            [['admin'], 'integer'],
+            [['email', 'username', 'password_hash', 'password_reset_token', 'auth_key', 'role'], 'string', 'max' => 255],
         ];
     }
 
@@ -58,7 +57,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
             'auth_key' => 'Auth Key',
             'created_at' => 'Created at',
             'updated_at' => 'Updated at',
-            'admin' => 'Admin',
+            'role' => 'Role',
         ];
     }
 
@@ -183,10 +182,19 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     }
 
     /**
-     *
+     * removes passwordResetToken
      */
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    /**
+     * checks whether the user is admin or not
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return $this->role === "admin";
     }
 }
