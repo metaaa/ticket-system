@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Report;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -33,8 +34,23 @@ $this->params['breadcrumbs'][] = $this->title;
             'suspectId',
             'calmDown',
             'comment',
+            'reported',
 
-            ['class' => 'yii\grid\ActionColumn'],
+
+            ['class' => 'yii\grid\ActionColumn',
+                 'template' => '{view} {report}',
+                 'buttons' => [
+                     'report' => function ($model, $key, $index) {
+                         if (true) {
+                             $options = [
+                                 'title' => Yii::t('yii', 'Report'),
+                             ];
+                             return Html::a('Report', ['create'], ['class' => 'btn btn-success']);
+                         };
+                         //return Html::a('Create Report', ['create'], ['class' => 'btn btn-success']);
+                     },
+                 ]
+            ],
         ],
     ]); ?>
 

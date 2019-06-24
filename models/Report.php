@@ -14,6 +14,7 @@ use Yii;
  * @property int $suspectId
  * @property int $calmDown
  * @property string $comment
+ * @property int $reported
  */
 class Report extends \yii\db\ActiveRecord
 {
@@ -32,7 +33,7 @@ class Report extends \yii\db\ActiveRecord
     {
         return [
             [['room', 'status', 'reporterId'], 'required'],
-            [['room', 'reporterId', 'suspectId', 'calmDown'], 'integer'],
+            [['room', 'reporterId', 'suspectId', 'calmDown', 'reported'], 'integer'],
             [['status', 'comment'], 'string', 'max' => 255],
         ];
     }
@@ -50,6 +51,7 @@ class Report extends \yii\db\ActiveRecord
             'suspectId' => 'Suspect ID',
             'calmDown' => 'Calm Down',
             'comment' => 'Comment',
+            'reported' => 'Reported',
         ];
     }
 
@@ -60,5 +62,10 @@ class Report extends \yii\db\ActiveRecord
     public static function find()
     {
         return new ReportQuery(get_called_class());
+    }
+
+    public function countReported()
+    {
+        return $this->reported;
     }
 }

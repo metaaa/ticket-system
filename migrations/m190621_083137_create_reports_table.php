@@ -20,6 +20,7 @@ class m190621_083137_create_reports_table extends Migration
             'suspectId' => $this->integer(),
             'calmDown' => $this->integer(),
             'comment' => $this->string(),
+            'reported' => $this->integer()->defaultValue(0),
         ]);
     }
 
