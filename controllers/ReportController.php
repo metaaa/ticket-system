@@ -127,5 +127,17 @@ class ReportController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
+    public function actionReport($id)
+    {
+        $model = Report::findOne([$id]);
 
+        if ($model->reported == 2){
+            $this->findModel($id)->delete();
+            return $this->redirect(['index']);
+        } elseif ($model->reported < 2) {
+            $model->reported += 1;
+            $model->save();
+            return $this->redirect(['index']);
+        }
+    }
 }

@@ -64,8 +64,8 @@ class Report extends \yii\db\ActiveRecord
         return new ReportQuery(get_called_class());
     }
 
-    public function countReported()
+    public static function countReported($reported)
     {
-        return $this->reported;
+        return static::findOne(['reported' => $reported]);
     }
 }
