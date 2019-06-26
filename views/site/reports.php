@@ -35,9 +35,7 @@ $this->title = 'Submitted Reports';
             'comment',
             'reported',
 
-            ['class' => 'yii\grid\ActionColumn',
-            //'template' => '{view}',
-            ]
+            ['class' => 'yii\grid\ActionColumn',]
         ],
     ]); ?>
 

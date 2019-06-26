@@ -23,6 +23,7 @@ use Yii;
 
 class User extends ActiveRecord implements \yii\web\IdentityInterface
 {
+    const ROLE_ADMIN = "admin";
 
     /**
      * {@inheritdoc}
@@ -195,6 +196,6 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
      */
     public function isAdmin()
     {
-        return $this->role === "admin";
+        return $this->role === self::ROLE_ADMIN;
     }
 }

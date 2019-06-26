@@ -68,4 +68,13 @@ class Report extends \yii\db\ActiveRecord
     {
         return static::findOne(['reported' => $reported]);
     }
+
+    public function beforeSave($insert)
+    {
+        if ($this->isNewRecord) {
+            $this->reporterId = Yii::$app->getUser()->id;
+        }
+
+        return parent::beforeSave($insert);
+    }
 }

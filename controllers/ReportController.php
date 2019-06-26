@@ -14,6 +14,9 @@ use yii\filters\VerbFilter;
  */
 class ReportController extends Controller
 {
+    const MAX_REPORT = 4;
+    const DB_ERROR = "Error, data not saved!";
+
     /**
      * {@inheritdoc}
      */
@@ -65,10 +68,10 @@ class ReportController extends Controller
     public function actionCreate()
     {
         $model = new Report();
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
+
 
         return $this->render('create', [
             'model' => $model,
@@ -127,17 +130,33 @@ class ReportController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
+    /**
+     * Checks whether the max_report is reached or not.
+     * If so, it deletes the report, else increase the counter by 1.
+     * @param $id
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
     public function actionReport($id)
     {
-        $model = Report::findOne([$id]);
-
-        if ($model->reported == 2){
-            $this->findModel($id)->delete();
-            return $this->redirect(['index']);
-        } elseif ($model->reported < 2) {
-            $model->reported += 1;
-            $model->save();
-            return $this->redirect(['index']);
+        $report = Report::findOne([$id]);
+        if ($report->reported !== self::MAX_REPORT) {
+            $report->reported++;
+            if (!$report->save()) {
+                Yii::error("Error updating DB record.");
+                Yii::$app->session->setFlash('error', self::DB_ERROR);
+            }
+            Yii::$app->session->setFlash('success', "Reported!");
+        } else {
+            if (!$report->delete()) {
+                Yii::error("Error deleting DB record.");
+                Yii::$app->session->setFlash('error', self::DB_ERROR);
+            }
+            Yii::$app->session->setFlash('success', "Outdated report is deleted!");
         }
+
+        return $this->redirect(['index']);
     }
 }

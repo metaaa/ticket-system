@@ -4,7 +4,6 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 $model->reporterId = Yii::$app->getUser()->id;
-
 /* @var $this yii\web\View */
 /* @var $model app\models\Report */
 /* @var $form yii\widgets\ActiveForm */
