@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\Html;
 /* @var $this yii\web\View */
 
 $this->title = 'My Yii Application';
@@ -11,7 +12,9 @@ $this->title = 'My Yii Application';
 
         <p class="lead">to the website of the ultimate olfers.</p>
 
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Let me report smthng!</a></p>
+        <?= Html::a('Lemme report smthng!',
+            ['/report'],
+            ['class' => 'btn btn-primary mb-3']) ?>
     </div>
 
     <div class="body-content">
@@ -51,3 +54,4 @@ $this->title = 'My Yii Application';
 
     </div>
 </div>
+3

@@ -25,7 +25,6 @@ class SiteController extends Controller
 
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['login', 'signup', 'logout'],
                 'rules' => [
                     [
                         'actions' => ['logout'],
@@ -33,9 +32,8 @@ class SiteController extends Controller
                         'roles' => ['@'],
                     ],
                     [
-                        'actions' => ['login', 'signup'],
+                        'actions' => ['index', 'about', 'contact', 'signup', 'reports', 'login'],
                         'allow' => true,
-                        'roles' => ['?'],
                     ],
                 ],
             ],
