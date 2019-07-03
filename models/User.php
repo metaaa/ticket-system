@@ -23,7 +23,6 @@ use Yii;
 
 class User extends ActiveRecord implements \yii\web\IdentityInterface
 {
-    const ROLE_ADMIN = "admin";
 
     /**
      * {@inheritdoc}
@@ -190,12 +189,4 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
         $this->password_reset_token = null;
     }
 
-    /**
-     * checks whether the user is admin or not
-     * @return bool
-     */
-    public function isAdmin()
-    {
-        return $this->role === self::ROLE_ADMIN;
-    }
 }

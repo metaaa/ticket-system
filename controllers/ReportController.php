@@ -15,8 +15,6 @@ use yii\filters\AccessControl;
  */
 class ReportController extends Controller
 {
-    const MAX_REPORT = 4;
-    const DB_ERROR = "Error, data not saved!";
 
     /**
      * {@inheritdoc}
@@ -24,15 +22,16 @@ class ReportController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
+/*            'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
                         'actions' => ['report', 'logout'],
-                        'allow' => false,
+                        'roles' => ['@'],
+                        'allow' => true,
                     ],
                 ],
-            ],
+            ],*/
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -74,6 +73,8 @@ class ReportController extends Controller
      * Creates a new Report model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
+     * @throws \Exception
+     * @throws \Throwable
      */
     public function actionCreate()
     {
@@ -94,6 +95,7 @@ class ReportController extends Controller
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
+     * @throws \Throwable
      */
     public function actionUpdate($id)
     {
@@ -152,21 +154,12 @@ class ReportController extends Controller
     public function actionReport($id)
     {
         $report = Report::findOne([$id]);
-        if ($report->reported !== self::MAX_REPORT) {
-            $report->reported++;
-            if (!$report->save()) {
-                Yii::error("Error updating DB record.");
-                Yii::$app->session->setFlash('error', self::DB_ERROR);
-            }
+        try {
+            $report->handleReport();
             Yii::$app->session->setFlash('success', "Reported!");
-        } else {
-            if (!$report->delete()) {
-                Yii::error("Error deleting DB record.");
-                Yii::$app->session->setFlash('error', self::DB_ERROR);
-            }
-            Yii::$app->session->setFlash('success', "Outdated report is deleted!");
+        } catch (\Exception $exception) {
+            Yii::$app->session->setFlash('error', 'Error: ', $exception->getMessage());
         }
-
         return $this->redirect(['index']);
     }
 }
