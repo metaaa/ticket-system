@@ -8,7 +8,6 @@ use app\models\ReportSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 
 /**
  * ReportController implements the CRUD actions for Report model.
@@ -22,16 +21,6 @@ class ReportController extends Controller
     public function behaviors()
     {
         return [
-/*            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions' => ['report', 'logout'],
-                        'roles' => ['@'],
-                        'allow' => true,
-                    ],
-                ],
-            ],*/
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -79,7 +68,8 @@ class ReportController extends Controller
     public function actionCreate()
     {
         $model = new Report();
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -101,7 +91,8 @@ class ReportController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

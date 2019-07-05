@@ -41,14 +41,14 @@ AppAsset::register($this);
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest ? (
-            ['label' => 'Signup', 'url' => ['/site/signup']]) : (""),
             Yii::$app->user->isGuest ? ("") : (
             ['label' => 'User Edit', 'url' => ['/user']]),
             Yii::$app->user->isGuest ? (
             ['label' => 'Reports', 'url' => ['/site/reports']]
             ) : (
             ['label' => 'Report!', 'url' => ['/report']]),
+            Yii::$app->user->isGuest ? (
+            ['label' => 'Signup', 'url' => ['/site/signup']]) : (""),
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
@@ -77,9 +77,8 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; metaVisual <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
     </div>
 </footer>
 

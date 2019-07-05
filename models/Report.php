@@ -68,16 +68,6 @@ class Report extends \yii\db\ActiveRecord
         return new ReportQuery(get_called_class());
     }
 
-    /**
-     * Queries the records 'reported' value
-     *
-     * @param $reported
-     * @return Report|null
-     */
-    public static function countReported($reported)
-    {
-        return static::findOne(['reported' => $reported]);
-    }
 
     /**
      * Checks whether the number of reports for the record reached the treshold or not
